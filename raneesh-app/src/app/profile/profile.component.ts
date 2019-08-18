@@ -6,7 +6,7 @@ import { ProfileService } from '../services/profile.service';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  //data=[];
+  error=null;
   searchText: string = '';
   data = [];
   repos: any;
@@ -19,7 +19,9 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     // subscribe api get call
-    this.ProfileService.getUser().subscribe(res => this.data = res);
+    this.ProfileService.getUser().subscribe(res => this.data = res,
+      error=>console.log(error)
+    )
   }
   userDetails(obj: any) {
     this.showRepoTab = true;
